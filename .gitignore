@@ -1,19 +1,8 @@
-# Ignore node modules
+# .gitignore
+
 node_modules/
-
-# Ignore log files
-*.log
-
-# Ignore build outputs
 dist/
 build/
-
-# Ignore system files
-.DS_Store
-Thumbs.db
-
-# Ignore env files
 .env
-
-# VS Code stuff
+*.log
 .vscode/
