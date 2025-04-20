@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './Helpline.css'; // Importing the custom CSS file
 
 const helplines = {
   Fire: '🔥 Fire Brigade: 101',
@@ -11,16 +12,16 @@ const helplines = {
 };
 
 export default function Helpline() {
-  const navigate = useNavigate(); // ✅ INSIDE component
-  const { type } = useParams();   // ✅ INSIDE component
+  const navigate = useNavigate();
+  const { type } = useParams();
 
   const helpline = helplines[type] || helplines.Default;
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Emergency Type: {type}</h2>
-      <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{helpline}</p>
-      <button onClick={() => navigate('/dashboard')}>Back to Dashboard</button>
+    <div className="helpline-container">
+      <h2 className="helpline-title">Emergency Type: {type}</h2>
+      <p className="helpline-info">{helpline}</p>
+      <button className="back-button" onClick={() => navigate('/dashboard')}>Back to Dashboard</button>
     </div>
   );
 }
