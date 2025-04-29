@@ -33,9 +33,23 @@ pipeline {
         stage('Health Check') {
             steps {
                 script {
-                    def result = bat(script: 'curl -s http://localhost:3000', returnStatus: true)
-                    if (result != 0) {
-                        error("Health check failed! Client app is not responding.")
+                    def retries = 10
+                    def success = false
+
+                    for (int i = 0; i < retries; i++) {
+                        def result = bat(script: 'curl --fail -s http://localhost:3000', returnStatus: true)
+                        if (result == 0) {
+                            echo "✅ Client app is up and running!"
+                            success = true
+                            break
+                        } else {
+                            echo "⏳ Waiting for client app... retry ${i+1}/${retries}"
+                            sleep(time: 5, unit: 'SECONDS')
+                        }
+                    }
+
+                    if (!success) {
+                        error("❌ Health check failed! Client app is not responding after ${retries} attempts.")
                     }
                 }
             }
@@ -44,7 +58,7 @@ pipeline {
 
     post {
         failure {
-            echo "Build failed. Cleaning up containers..."
+            echo "🧹 Build failed. Cleaning up containers..."
             bat 'docker-compose down'
         }
     }
