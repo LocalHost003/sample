@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/<your-org-or-username>/<your-repo>.git', branch: 'main'
+                git url: 'https://github.com/LocalHost003/sample.git', branch: 'main'
             }
         }
 
