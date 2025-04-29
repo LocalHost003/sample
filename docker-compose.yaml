@@ -2,7 +2,7 @@ services:
   mongo:
     image: mongo
     ports:
-      - "27018:27017"
+      - "27019:27017"
     volumes:
       - mongo-data:/data/db
 
@@ -11,7 +11,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongo:27018/mern
+      - MONGO_URI=mongodb://mongo:27019/mern
     depends_on:
       - mongo
 
