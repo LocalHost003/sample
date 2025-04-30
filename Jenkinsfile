@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                  git credentialsId: 'github-ssh', url: 'git@github.com:LocalHost003/sample.git', branch: 'main'
+                  git url: 'https://github.com/LocalHost003/sample.git', credentialsId: 'your-https-credentials'
+
             }
         }
 
