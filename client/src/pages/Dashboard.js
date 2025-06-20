@@ -16,7 +16,7 @@ export default function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/login');
+      navigate('/dashboard');
       return;
     }
     fetchAlerts();
@@ -30,15 +30,17 @@ export default function Dashboard() {
       const res = await axios.get('http://localhost:5000/api/emergency/all', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
+      console.log("Fetched alerts:", res.data); // Debug log
       const reversed = res.data.reverse();
       setAlerts(reversed);
       setFilteredAlerts(reversed);
     } catch (err) {
-      console.error('Failed to fetch alerts', err);
+      console.error('Failed to fetch alerts', err.response?.data || err.message);
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleSearch = (e) => {
     const keyword = e.target.value.toLowerCase();

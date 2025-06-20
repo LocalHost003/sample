@@ -6,8 +6,6 @@ import EmergencyForm from './pages/EmergencyForm';
 import Signup from './pages/Signup';
 import AboutUs from './pages/AboutUs';  // Import AboutUs component
 import ContactUs from './pages/ContactUs';
-// src/App.js
-
 import HelplinePage from './pages/Helpline'; // ✅ correct path
 
 
